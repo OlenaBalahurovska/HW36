@@ -10,6 +10,36 @@
     <input type="text" id="input1">
     <input type="text" id="input2">
     <input type="text" id="input3">
-    <textarea id="output" rows="4" cols="50"></textarea>
+    <textarea id="output" rows="3" cols="30"></textarea>
+
+    <script>
+        // Посилання на наші елементи DOM
+        const input1 = document.querySelector('#input1');
+        const input2 = document.querySelector('#input2');
+        const input3 = document.querySelector('#input3');
+        const output = document.querySelector('#output');
+        
+        let prevInput1Value = input1.value;
+        let prevInput2Value = input2.value;
+        let prevInput3Value = input3.value;
+
+        // Перевіряемо і оновлюємо textarea
+        function updateTextarea() {
+            const currentInput1Value = input1.value;
+            const currentInput2Value = input2.value;
+            const currentInput3Value = input3.value;
+
+            if (currentInput1Value !== prevInput1Value || currentInput2Value !== prevInput2Value || currentInput3Value !== prevInput3Value) {
+                // Оновлення textarea з новими значеннями полів через кому
+                output.value = [currentInput1Value, currentInput2Value, currentInput3Value].join(', ');
+
+                prevInput1Value = currentInput1Value;
+                prevInput2Value = currentInput2Value;
+                prevInput3Value = currentInput3Value;
+            }
+        }
+
+        setInterval(updateTextarea, 2000);
+    </script>
 </body>
 </html>
