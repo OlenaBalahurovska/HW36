@@ -7,9 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" id="input1">
-    <input type="text" id="input2">
-    <input type="text" id="input3">
-    <textarea id="output" rows="4" cols="50"></textarea>
+    <!-- Замість input1, input2, input3 використовуємо клас input -->
+    <input type="text" class="input" id="input1">
+    <input type="text" class="input" id="input2">
+    <input type="text" class="input" id="input3">
+    <textarea id="output" rows="3" cols="30"></textarea>
+
+    <script>
+        const inputs = document.querySelectorAll('.input');
+        const output = document.querySelector('#output');
+        
+        const prevInputValues = Array.from(inputs, input => input.value);
+
+        function updateTextarea() {
+            const currentInputValues = Array.from(inputs, input => input.value);
+
+            if (!currentInputValues.every((value, index) => value === prevInputValues[index])) {
+                output.value = currentInputValues.join(', ');
+
+                prevInputValues.forEach((value, index) => {
+                    prevInputValues[index] = currentInputValues[index];
+                });
+            }
+        }
+
+        setInterval(updateTextarea, 2000);
+    </script>
 </body>
 </html>
